@@ -5,7 +5,6 @@ import { fetchGreeting } from './features/greetingSlice';
 const Greeting = () => {
   const greeting = useSelector((state) => state.greeting);
   const dispatch = useDispatch();
-  console.log(greeting);
 
   return (
     <div>
