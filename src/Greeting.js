@@ -9,7 +9,7 @@ const Greeting = () => {
 
   return (
     <div>
-      <h1>{greeting}</h1>
+      <h1>{greeting.message}</h1>
       <button
         className="fetch-button"
         type="button"

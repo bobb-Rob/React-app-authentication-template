@@ -8,9 +8,13 @@ export const fetchGreeting = createAsyncThunk(
   },
 );
 
+const initialState = {
+  message: 'Click the button below to greet the world',
+};
+
 const greetingSlice = createSlice({
   name: 'greeting',
-  initialState: 'Click the button below to greet the world',
+  initialState,
   reducers: {},
   extraReducers: {
     [fetchGreeting.fulfilled]: (state, action) => action.payload,
