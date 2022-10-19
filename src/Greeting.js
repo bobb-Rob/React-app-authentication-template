@@ -3,23 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchGreeting } from './features/greetingSlice';
 
 const Greeting = () => {
-  const greeting = useSelector(state => state.greeting);
+  const greeting = useSelector((state) => state.greeting);
   const dispatch = useDispatch();
-  
+  console.log(greeting);
+
   return (
     <div>
-      <h1>{greeting.message}</h1>
+      <h1>{greeting}</h1>
       <button
-        style={{ fontSize: '2em', padding: 20, backgroundColor: 'blue', color: 'white' }}
+        className="fetch-button"
         type="button"
-        onClick={() => {
-          dispatch(fetchGreeting())
-        }}
+        onClick={() => dispatch(fetchGreeting())}
       >
-        greet
+        Greet
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default Greeting;
