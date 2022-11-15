@@ -1,57 +1,60 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './app/features/dashboard/Dashboard';
+import PrivateRoute from './app/features/routes/PrivateRoute';
+import PublicOnlyRoute from './app/features/routes/PublicRoute';
+import Login from './app/features/sessions/Login';
+import Logout from './app/features/sessions/Logout';
+import PersistLogin from './app/features/sessions/PersistLogin';
+import SignUp from './app/features/sessions/SignUp';
+import DataProvider from './app/DataProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <DataProvider>
+      <Router>
+        {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
+        <main>
+          <Routes>
+            <Route element={<PersistLogin />}>
+              <Route
+                path="/"
+                element={(
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+              )}
+              />
+              <Route
+                path="/logout"
+                element={(
+                  <PrivateRoute>
+                    <Logout />
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/login"
+                element={(
+                  <PublicOnlyRoute>
+                    <Login />
+                  </PublicOnlyRoute>
+                )}
+              />
+              <Route
+                path="/signup"
+                element={(
+                  <PublicOnlyRoute>
+                    <SignUp />
+                  </PublicOnlyRoute>
+                )}
+              />
+            </Route>
+          </Routes>
+        </main>
+        {/* </main> */}
+      </Router>
+    </DataProvider>
   );
 }
 
